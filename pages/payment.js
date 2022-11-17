@@ -12,7 +12,7 @@ export default function PaymentScreen() {
   const router = useRouter()
   const { state, dispatch } = useContext(Store)
   const { cart } = state
-  const { shippingAddress, paymentMethod } = cart
+  // const { shippingAddress, paymentMethod } = cart
 
   const submitHandler = (e) => {
     e.preventDefault()
