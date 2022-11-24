@@ -39,6 +39,43 @@ export default function LoginScreen() {
     }
   }
 
+  const githubLoginHandler = async () => {
+    try {
+      const result = await signIn('github', { redirect: false })
+      console.log('Github login: ' + result)
+    } catch (err) {
+      toast.error(getError(err))
+    }
+  }
+
+  const googleLoginHandler = async () => {
+    try {
+      const result = await signIn('google', { redirect: false })
+      console.log('Google login: ' + result)
+    } catch (err) {
+      toast.error(getError(err))
+    }
+  }
+
+  const kakaoLoginHandler = async () => {
+    try {
+      const result = await signIn('kakao', { redirect: false })
+      console.log('Kakao login: ' + result)
+    } catch (err) {
+      toast.error(getError(err))
+    }
+  }
+
+  const naverLoginHandler = async () => {
+    try {
+      // await signIn('naver', { redirect: false })
+      const result = await signIn('naver', { redirect: false })
+      console.log('Naver login: ' + result)
+    } catch (err) {
+      toast.error(getError(err))
+    }
+  }
+
   return (
     <Layout title="Login">
       <form
@@ -47,8 +84,10 @@ export default function LoginScreen() {
       >
         <h1 className="text-xl mb-4">Login</h1>
 
-        <div className="mb-4">
-          <label htmlFor="email">Email</label>
+        <div className="mb-4 p-4 m-4">
+          <label htmlFor="email" className="mt-2">
+            Email
+          </label>
           <input
             type="email"
             {...register('email', {
@@ -65,10 +104,10 @@ export default function LoginScreen() {
           {errors.email && (
             <div className="text-red-500">{errors.email.message}</div>
           )}
-        </div>
 
-        <div className="mb-4">
-          <label htmlFor="password">Password</label>
+          <label htmlFor="password" className="mt-2">
+            Password
+          </label>
           <input
             type="password"
             {...register('password', {
@@ -85,19 +124,54 @@ export default function LoginScreen() {
           {errors.password && (
             <div className="text-red-500">{errors.password.message}</div>
           )}
-        </div>
 
-        <div className="mb-4">
-          <button className="primary-button" type="submit">
+          <button className="primary-button mt-2" type="submit">
             Login
           </button>
+          <div className=" mt-4">
+            계정이 없으면 등록하세요... &nbsp;
+            <Link href="register">
+              <a>Register</a>
+            </Link>
+          </div>
         </div>
 
-        <div className="mb-4">
-          계정이 없으면 등록하세요... &nbsp;
-          <Link href="register">
-            <a>Register</a>
-          </Link>
+        <div className="p-4 rounded-lg">
+          <div className="mb-4">
+            <button
+              className="primary-button w-full"
+              onClick={githubLoginHandler}
+            >
+              Github Login
+            </button>
+          </div>
+
+          <div className="mb-4">
+            <button
+              className="primary-button w-full"
+              onClick={googleLoginHandler}
+            >
+              Google Login
+            </button>
+          </div>
+
+          <div className="mb-4">
+            <button
+              className="primary-button w-full"
+              onClick={kakaoLoginHandler}
+            >
+              카카오 로그인
+            </button>
+          </div>
+
+          <div className="mb-4">
+            <button
+              className="primary-button w-full"
+              onClick={naverLoginHandler}
+            >
+              네이버 로그인
+            </button>
+          </div>
         </div>
       </form>
     </Layout>
